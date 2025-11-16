@@ -1,8 +1,8 @@
 packer {
   required_plugins {
-  digitalocean = {
-    version = ">= 1.0.4"
-    source  = "github.com/hashicorp/digitalocean"
+    digitalocean = {
+      version = ">= 1.4.1"
+      source  = "github.com/digitalocean/digitalocean"
     }
   }
 }
@@ -12,10 +12,10 @@ variable "do_token" {
   sensitive = true
 }
 
-source "digitalocean" "bullseye" {
+source "digitalocean" "bookworm" {
   api_token     = var.do_token
   droplet_agent = false
-  image         = "debian-11-x64"
+  image         = "debian-12-x64"
   monitoring    = false
   region        = "nyc1"
   size          = "s-1vcpu-512mb-10gb"
@@ -25,7 +25,7 @@ source "digitalocean" "bullseye" {
 
 build {
   sources = [
-    "source.digitalocean.bullseye"
+    "source.digitalocean.bookworm"
   ]
 
   # Update the base image
